@@ -20,6 +20,9 @@ class AdaptiveClient implements ClientInterface
     {
         $this->options = $options;
         $this->client = function_exists('curl_init') ? new Curl() : new FileGetContents();
+        
+        // Fix timeout
+        $this->client->setTimeout(15);
     }
 
     public function send(RequestInterface $request, MessageInterface $response)
